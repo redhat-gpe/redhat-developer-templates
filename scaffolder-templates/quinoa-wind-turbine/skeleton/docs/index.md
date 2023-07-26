@@ -3,7 +3,7 @@
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-![Screenshot of the game](docs/board.png)
+![Screenshot of the game](board.png)
 
 ## Running the application in dev mode
 
