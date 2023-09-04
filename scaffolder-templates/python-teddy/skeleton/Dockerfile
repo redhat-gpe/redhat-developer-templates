@@ -7,7 +7,7 @@ COPY --chown=default:root ./frontend/src ./src
 COPY --chown=default:root ./frontend/stories ./stories
 COPY --chown=default:root ./frontend/.storybook .storybook
 COPY --chown=default:root ./frontend/__mocks__ ./__mocks__
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 FROM registry.access.redhat.com/ubi9/python-39:1-108
