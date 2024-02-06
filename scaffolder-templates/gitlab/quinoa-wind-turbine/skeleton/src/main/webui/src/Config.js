@@ -9,12 +9,12 @@ export const TEAMS_CONFIG = [
   {
     name: 'Team 1',
     color: 'skyblue',
-    car: 'car-1',
+    car: 'car-blue-convertible',
   },
   {
     name: 'Team 2',
     color: 'orange',
-    car: 'car-2',
+    car: 'car-classic-black',
   },
 ];
 
