@@ -257,8 +257,24 @@ data:
                       "cluster": "{{ "{{" }} cluster_id {{ "}}" }}",
                       "namespace": "{{ "{{" }} component_id {{ "}}" }}-preprod",
                       "label": {
-                         "strimzi.io/cluster" : "my-cluster"
-
+                          "key": "strimzi.io/cluster",
+                          "value": "my-cluster"
+                      }
+                  }
+              },
+              "image": null,
+              "expiration": null
+          },
+          {
+              "name": "",
+              "deployment": {
+                  "name": null,
+                  "scope": {
+                      "cluster": "{{ "{{" }} cluster_id {{ "}}" }}",
+                      "namespace": "{{ "{{" }} component_id {{ "}}" }}-prod",
+                      "label": {
+                          "key": "strimzi.io/cluster",
+                          "value": "my-cluster"
                       }
                   }
               },
