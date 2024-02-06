@@ -7,25 +7,25 @@ export const IS_TOUCH_DEVICE = (('ontouchstart' in window)
 // available cars images: 'car-classic-black', 'car-barbie', 'car-grey', 'car-red', 'car-blue-convertible', 'car-orange'
 export const TEAMS_CONFIG = [
   {
-    name: 'Team 1',
-    color: 'skyblue',
-    car: 'car-blue-convertible',
+    name: 'Mountains',
+    color: 'grey',
+    car: 'car-orange',
   },
   {
-    name: 'Team 2',
-    color: 'orange',
-    car: 'car-classic-black',
+    name: 'Beach',
+    color: 'skyblue',
+    car: 'car-blue-convertible',
   },
 ];
 
 // Dashboard
 export const TAP_POWER = 15; // in MW
-export const NB_TAP_NEEDED_PER_USER = DEV_MODE ? 10 : 150;
+export const NB_TAP_NEEDED_PER_USER = 100;
 export const SHOW_TOP = 5;
 
 // Mobile app
-export const ENABLE_TAPPING = true;
-export const ENABLE_SHAKING = false; // 'false' in v1, set to 'true' in v2
+export const ENABLE_TAPPING = false;
+export const ENABLE_SHAKING = true; // 'false' in v1, set to 'true' in v2
 export const ENABLE_BLOWING = false;
 export const ENABLE_SWIPING = false;
 
