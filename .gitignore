@@ -29,3 +29,7 @@ yarn*
 node_modules
 .firebaserc
 .firebase
+
+.vscode
+.quarkus
+**/.quinoa
