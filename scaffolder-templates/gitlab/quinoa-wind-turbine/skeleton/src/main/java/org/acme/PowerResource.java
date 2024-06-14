@@ -1,7 +1,6 @@
 package org.acme;
 
 import io.smallrye.mutiny.Multi;
-import io.smallrye.reactive.messaging.kafka.Record;
 import jakarta.annotation.security.RolesAllowed;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
@@ -19,7 +18,7 @@ import java.time.Duration;
 import java.util.List;
 
 @ApplicationScoped
-@Path("power")
+@Path("/power")
 public class PowerResource {
 
     @Channel("power-in") Multi<Power> powerIn;

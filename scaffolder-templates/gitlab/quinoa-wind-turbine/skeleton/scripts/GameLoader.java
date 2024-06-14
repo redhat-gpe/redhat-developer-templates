@@ -44,10 +44,10 @@ class GameLoader implements Callable<Integer> {
     @Option(names = {"-p", "--players"}, description = "The amount of players to assign", defaultValue = "50")
     private int players;
 
-    @Option(names = {"-c", "--clicks"}, description = "How many click each player will trigger", defaultValue = "100")
+    @Option(names = {"-c", "--clicks"}, description = "How many click each player will trigger", defaultValue = "1000")
     private int clicks;
 
-    @Option(names = {"--power"}, description = "Click power", defaultValue = "15")
+    @Option(names = {"--power"}, description = "Click power", defaultValue = "100")
     private int power;
 
 
@@ -141,4 +141,3 @@ class GameLoader implements Callable<Integer> {
         latchClick.await();
     }
 }
-
