@@ -6,4 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-     - https://{{ gitlab_host }}/{{ gitlab_group }}/wind-turbine-templates/blob/main/scaffolder-templates/gitlab/quinoa-wind-turbine/template.yaml
+     - https://{{ gitlab_host }}/{{ gitlab_group }}/wind-turbine-templates/blob/master/scaffolder-templates/gitlab/quinoa-wind-turbine/template.yaml
