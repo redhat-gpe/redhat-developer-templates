@@ -36,7 +36,7 @@ spec:
           title: Cluster Id
           type: string
           description: Id of the cluster
-          default: .apps.cluster-pp72k.sandbox1540.opentlc.com
+          default: {{ cluster_subdomain }}
         namespace:
           title: Namespace
           type: string
@@ -77,7 +77,7 @@ spec:
                   title: Image Host
                   type: string
                   description: Host for storing image
-                  default: quay-pp72k.apps.cluster-pp72k.sandbox1540.opentlc.com
+                  default: {{ quay_host }}
                 image_organization:
                   title: Organization
                   type: string
@@ -100,7 +100,7 @@ spec:
               title: Repo Host
               type: string
               description: Your SCM host
-              default: gitlab-gitlab.apps.cluster-pp72k.sandbox1540.opentlc.com
+              default: {{ gitlab_host }}
             owner:
               title: Repo Owner
               type: string
@@ -126,30 +126,30 @@ spec:
         copyWithoutTemplating:
           - .github/workflows/*
         values:
-          component_id: ${{ parameters.namespace }}-${{ parameters.application_id }}
-          description: ${{ parameters.description }}
-          namespace_raw: ${{ parameters.namespace }}
-          namespace: ${{ parameters.namespace }}-dev
-          owner: ${{ user.entity.metadata.name }}
-          cluster: ${{ parameters.cluster_id }}
-          host: ${{ parameters.repo.host }}
-          destination: ${{ parameters.repo.owner }}/${{ parameters.namespace }}-${{ parameters.application_id }}
-          quay_destination: ${{ parameters.image_organization}}/${{ parameters.namespace }}-${{ parameters.application_id }}
+          component_id: {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
+          description: {{ '${{ parameters.description }}' }}
+          namespace_raw: {{ '${{ parameters.namespace }}' }}
+          namespace: {{ '${{ parameters.namespace }}' }}-dev
+          owner: {{ '${{ user.entity.metadata.name }}' }}
+          cluster: {{ '${{ parameters.cluster_id }}' }}
+          host: {{ '${{ parameters.repo.host }}' }}
+          destination: {{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
+          quay_destination: {{ '${{ parameters.image_organization}}' }}/{{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
           port: 8080
-          verify_commits: ${{ parameters.repo.verify_commits }}
+          verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
 
     - id: publish
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.namespace }}-${{ parameters.application_id }}"
+        repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}"
         repoVisibility: public
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        repoContentsUrl: {{ '${{ steps.publish.output.repoContentsUrl }}' }}
         catalogInfoPath: "/catalog-info.yaml"
 
     - id: template-gitops-deployment
@@ -159,33 +159,33 @@ spec:
         url: ./manifests
         copyWithoutTemplating: []
         values:
-          component_id: ${{ parameters.namespace }}-${{ parameters.application_id }}
-          description: ${{ parameters.description }}
-          destination: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.namespace }}-${{ parameters.application_id }}-gitops.git
-          source_repository: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.namespace }}-${{ parameters.application_id }}.git
-          repository_name: ${{ parameters.namespace }}-${{ parameters.application_id }}
-          git_owner: ${{ parameters.repo.owner }}
-          cluster: ${{ parameters.cluster_id }}
-          namespace: ${{ parameters.namespace }}
-          image_registry: ${{ parameters.image_registry }}
-          image_host: ${{ parameters.image_host }}
-          image_organization: ${{ parameters.image_organization }}
-          image_name: ${{ parameters.namespace }}-${{ parameters.application_id }}
-          image_tag: ${{ parameters.image_tag }}
+          component_id: {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
+          description: {{ '${{ parameters.description }}' }}
+          destination: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}-gitops.git
+          source_repository: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}.git
+          repository_name: {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
+          git_owner: {{ '${{ parameters.repo.owner }}' }}
+          cluster: {{ '${{ parameters.cluster_id }}' }}
+          namespace: {{ '${{ parameters.namespace }}' }}
+          image_registry: {{ '${{ parameters.image_registry }}' }}
+          image_host: {{ '${{ parameters.image_host }}' }}
+          image_organization: {{ '${{ parameters.image_organization }}' }}
+          image_name: {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
+          image_tag: {{ '${{ parameters.image_tag }}' }}
           port: 8080
-          repository_host: ${{ parameters.repo.host }}
+          repository_host: {{ '${{ parameters.repo.host }}' }}
           deployment_name: quarkus-template
-          user: ${{ user.entity.metadata.name }}
-          verify_commits: ${{ parameters.repo.verify_commits }}
+          user: {{ '${{ user.entity.metadata.name }}' }}
+          verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
         targetPath: ./tenant-gitops
 
     - id: publish-gitops
       name: Publishing to Resource Repository
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{ parameters.namespace }}-${{ parameters.application_id }}-gitops"
-        title: gitops resources for ${{ parameters.namespace }}-${{ parameters.application_id }}
-        description: gitops resources for ${{ parameters.namespace }}-${{ parameters.application_id }}
+        repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}-gitops"
+        title: gitops resources for {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
+        description: gitops resources for {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}
         sourcePath: ./tenant-gitops
         repoVisibility: public
 
@@ -193,16 +193,16 @@ spec:
       name: Create ArgoCD Resources
       action: argocd:create-resources
       input:
-        appName: ${{ parameters.namespace }}-${{ parameters.application_id }}-bootstrap
+        appName: {{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}-bootstrap
         argoInstance: main
         namespace: janus-argocd
-        repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.namespace }}-${{ parameters.application_id }}-gitops.git
+        repoUrl: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.namespace }}' }}-{{ '${{ parameters.application_id }}' }}-gitops.git
         path: 'argocd/'
 
   output:
     links:
       - title: Source Code Repository
-        url: ${{ steps.publish.output.remoteUrl }}
+        url: {{ '${{ steps.publish.output.remoteUrl }}' }}
       - title: Open Component in catalog
         icon: catalog
-        entityRef: ${{ steps.register.output.entityRef }}
+        entityRef: {{ '${{ steps.register.output.entityRef }}' }}

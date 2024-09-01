@@ -1,9 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
-  name: wind-turbine-templates
-  description: A collection of Backstage templates for Janus-IDP Backstage
+  name: redhat-developer-templates
+  description: A collection of Red Hat Developer Software Templates
 spec:
   type: url
   targets:
-     - https://{{ gitlab_host }}/{{ gitlab_group }}/wind-turbine-templates/blob/master/scaffolder-templates/gitlab/quinoa-wind-turbine/template.yaml
+    - scaffolder-templates/gitlab/quinoa-wind-turbine/template.yaml
+    - scaffolder-templates/gitlab/coolstore/catalog-spring-boot/template.yaml
+    - scaffolder-templates/gitlab/coolstore/gateway-vertx/template.yaml
+    - scaffolder-templates/gitlab/coolstore/inventory-quarkus/template.yaml
+    - scaffolder-templates/gitlab/coolstore/web-nodejs/template.yaml
