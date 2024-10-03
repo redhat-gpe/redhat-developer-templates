@@ -15,7 +15,7 @@ Game's architecture:
 
 ## Repository Breakdown
 
-* skeleton: app source code, it contains catalog-info, Dockerfile, Devfile, Gitlab CI  
+* skeleton: app source code, it contains catalog-info, Dockerfile, Devfile, Gitlab CI
 * manifests: Kubernetes manifests source code for building and deploying the app: Argo CD App of Apps, Helm for build and deploy, Tekton, Tekton Chains and Argo CD
 
 ## How to use this template
@@ -32,7 +32,7 @@ The setup will install the game in three envs:
 * Dev: all the new commits land here, any new git push will trigger the build pipeline
 * Pre-prod: When ready in dev, just tag your version in Gitlab and this will start the promote pipeline
 * Prod: When ready in pre-prod, create a new release in Gitlab from your tag and this will start again the promote pipeline
-  
+
 Do a first commit do kick-off the first pipeline and then follow the flow.
 
 A possible flow would be:
@@ -51,7 +51,7 @@ git config --local --edit
 
 [gitsign]
         fulcio = https://fulcio-server-trusted-artifact-signer.apps.cluster-6c6wk.sandbox879.opentlc.com
-        issuer = https://keycloak-keycloak-system.apps.cluster-6c6wk.sandbox879.opentlc.com/auth/realms/trusted-artifact-signer
+        issuer = https://keycloak-rhsso.apps.cluster-6c6wk.sandbox879.opentlc.com/auth/realms/trusted-artifact-signer
         rekor = https://rekor-server-trusted-artifact-signer.apps.cluster-6c6wk.sandbox879.opentlc.com
         clientid = trusted-artifact-signer
 
