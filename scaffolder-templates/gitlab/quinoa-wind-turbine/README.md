@@ -51,7 +51,7 @@ git config --local --edit
 
 [gitsign]
         fulcio = https://fulcio-server-trusted-artifact-signer.apps.cluster-6c6wk.sandbox879.opentlc.com
-        issuer = https://keycloak-rhsso.apps.cluster-6c6wk.sandbox879.opentlc.com/auth/realms/trusted-artifact-signer
+        issuer = https://keycloak-rhsso.apps.cluster-6c6wk.sandbox879.opentlc.com/auth/realms/openshift
         rekor = https://rekor-server-trusted-artifact-signer.apps.cluster-6c6wk.sandbox879.opentlc.com
         clientid = trusted-artifact-signer
 
