@@ -32,4 +32,4 @@ package*
 node_modules
 .firebaserc
 .firebase
-
+.quinoa
